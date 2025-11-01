@@ -226,10 +226,24 @@ impl Application {
                         nr_of_files,
                         if nr_of_files == 1 { "" } else { "s" } // avoid "Loaded 1 files." grammo
                     ));
-                    // align the view to center after all files are loaded,
-                    // does not affect views without pos since it is at the top
+
+                    // align the view after all files are loaded
                     let (view, doc) = current!(editor);
-                    align_view(doc, view, Align::Center);
+
+                    let text = doc.text().slice(..);
+                    let height = view.inner_area(doc).height as usize;
+                    let cursor = doc.selection(view.id).primary().cursor(text);
+
+                    // if the cursor is past the last half page, do not align the view
+                    // to the center, but instead towards the end.
+                    if text.len_lines() > height && cursor >= text.len_lines() - height / 2 {
+                        let view = view.id;
+                        editor.ensure_cursor_in_view(view);
+                    } else {
+                        // otherwise align the view the center
+                        // does not affect views without pos since it is at the top
+                        align_view(doc, view, Align::Center);
+                    }
                 }
             } else {
                 editor.new_file(Action::VerticalSplit);
