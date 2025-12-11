@@ -3096,8 +3096,7 @@ checksum = "756daf9b1013ebe47a8776667b466417e2d4c5679d441c26230efd9ef78692db"
 [[package]]
 name = "tree-house"
 version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "333476442882205ab249a8ced263ae53db3d0797c727cc3424836a6fb221d7b1"
+source = "git+https://github.com/m4rch3n1ng/tree-house?branch=queries-extend#83d331eef94cc2f83f79aa6ef21eacabcd50cae4"
 dependencies = [
  "arc-swap",
  "hashbrown 0.15.5",
@@ -3113,8 +3112,7 @@ dependencies = [
 [[package]]
 name = "tree-house-bindings"
 version = "0.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "58e4bee70ada3fca497abeb498c4919a192ce84eb8b747145277240494454372"
+source = "git+https://github.com/m4rch3n1ng/tree-house?branch=queries-extend#83d331eef94cc2f83f79aa6ef21eacabcd50cae4"
 dependencies = [
  "cc",
  "libloading",
