@@ -266,8 +266,8 @@ fn reconfigure_highlights(config: &SyntaxConfig, recognized_names: &[String]) {
 }
 
 pub fn read_query(lang: &str, query_filename: &str) -> String {
-    tree_house::read_query(lang, |language| {
-        helix_loader::grammar::load_runtime_file(language, query_filename).unwrap_or_default()
+    tree_house::read_query_extends(lang, |language| {
+        helix_loader::grammar::load_runtime_files(language, query_filename)
     })
 }
 

@@ -719,3 +719,10 @@ pub fn load_runtime_file(language: &str, filename: &str) -> Result<String, std::
     let path = crate::runtime_file(PathBuf::new().join("queries").join(language).join(filename));
     std::fs::read_to_string(path)
 }
+
+/// Gives the contents of all files from a language's `runtime/queries/<lang>`
+/// directories, in order of priority.
+pub fn load_runtime_files(language: &str, filename: &str) -> impl Iterator<Item = String> {
+    crate::runtime_files(PathBuf::new().join("queries").join(language).join(filename))
+        .filter_map(|path| std::fs::read_to_string(path).ok())
+}

@@ -117,6 +117,21 @@ pub fn runtime_file(rel_path: impl AsRef<Path>) -> PathBuf {
     })
 }
 
+/// Gets all files with paths relative to the runtime directories, in order of
+/// priority.
+///
+/// `rel_path` should be the relative path from within the `runtime/` directory.
+pub fn runtime_files(rel_path: impl AsRef<Path>) -> impl Iterator<Item = PathBuf> {
+    RUNTIME_DIRS.iter().filter_map(move |rt_dir| {
+        let path = rt_dir.join(&rel_path);
+        if path.exists() {
+            Some(path)
+        } else {
+            None
+        }
+    })
+}
+
 pub fn config_dir() -> PathBuf {
     // TODO: allow env var override
     let strategy = choose_base_strategy().expect("Unable to find the config directory!");
